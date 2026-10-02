@@ -5,6 +5,7 @@ import com.example.password_vault.repo.CredRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 @Service
 public class CredServiceImpl implements CredService
@@ -39,5 +40,20 @@ public class CredServiceImpl implements CredService
     public void deleteCredential(Long id)
     {
         credRepo.deleteById(id);
+    }
+
+    @Override
+    public Credential updateCredential(Credential credential,Long id)
+    {
+        Optional<Credential> existingCred = credRepo.findById(id);
+
+     if(existingCred.isPresent())
+     {
+         existingCred.get().setPassword(credential.getPassword());
+         existingCred.get().setUsername(credential.getUsername());
+
+         return credRepo.save(existingCred.get());
+     }
+     throw new NoSuchElementException("No User Exist");
     }
 }

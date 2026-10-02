@@ -21,7 +21,8 @@ public class Credential
     public Long getId() {
         return id;
     }
-
+    public Credential() {
+    }
     public void setId(Long id) {
         this.id = id;
     }

@@ -15,4 +15,6 @@ public interface CredService
 
     void deleteCredential(Long id);
 
+    Credential updateCredential(Credential credential,Long id);
+
 }
