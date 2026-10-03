@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,9 +32,13 @@ public class MySecurityConfig
                         auth.requestMatchers("/login").permitAll()
                                 .requestMatchers("/addUser").permitAll()
                                 .requestMatchers("/api/cred/**").authenticated()
+                                .requestMatchers("/profile").authenticated()
                                 .anyRequest().permitAll()
 
+
                 )
+               .httpBasic(Customizer.withDefaults())
+              /* .formLogin(form -> form.defaultSuccessUrl("/api/cred/GetAll",true))*/
                 .build();
     }
 
