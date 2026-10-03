@@ -6,6 +6,7 @@ import com.example.password_vault.dto.CredResponse;
 import com.example.password_vault.entity.Credential;
 import com.example.password_vault.service.CredService;
 import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class CredController {
 
 
     @PostMapping("/save")
-    public CredResponse addCredential(@Valid @RequestBody CredRequest request) {
+    public ResponseEntity<CredResponse> addCredential(@Valid @RequestBody CredRequest request) {
 
         Credential convertedCred = new Credential();
 
@@ -39,15 +40,15 @@ public class CredController {
         credResponse.setUsername(savedCred.getUsername());
         credResponse.setWebsite(savedCred.getWebsite());
 
-        return credResponse;
+        return ResponseEntity.ok(credResponse);
     }
 
 
     @GetMapping("/GetAll")
-    public List<CredResponse> getAllCredential() {
+    public ResponseEntity<List<CredResponse>> getAllCredential()
+    {
 
         List<Credential> credentials = credService.getAllCredential();
-
         List<CredResponse> responses = new ArrayList<>();
 
         for (Credential credential : credentials) {
@@ -60,12 +61,13 @@ public class CredController {
             responses.add(response);
         }
 
-        return responses;
+        return ResponseEntity.ok(responses);
 
     }
 
     @GetMapping("/getById/{id}")
-    public CredResponse getCredById(@PathVariable Long id) {
+    public ResponseEntity<CredResponse> getCredById(@PathVariable Long id)
+    {
 
         Optional<Credential> credential = credService.getCredentialById(id);
 
@@ -75,8 +77,7 @@ public class CredController {
         response.setWebsite(credential.get().getWebsite());
         response.setUsername(credential.get().getUsername());
 
-
-        return response;
+        return ResponseEntity.ok(response);
 
     }
 
@@ -87,7 +88,7 @@ public class CredController {
     }
 
     @PutMapping("/update/{id}")
-    public CredResponse updateCred(@Valid @RequestBody CredRequest request, @PathVariable Long id) {
+    public ResponseEntity<CredResponse> updateCred(@Valid @RequestBody CredRequest request, @PathVariable Long id) {
         Credential convertedCred = new Credential();
 
         convertedCred.setUsername(request.getUsername());
@@ -101,10 +102,8 @@ public class CredController {
         credResponse.setWebsite(savedCred.getWebsite());
         credResponse.setId(savedCred.getId());
 
-        return credResponse;
-
+        return ResponseEntity.ok(credResponse);
 
     }
-
 
 }
