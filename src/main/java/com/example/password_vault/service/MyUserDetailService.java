@@ -1,8 +1,9 @@
-/*
 package com.example.password_vault.service;
 
 
+import com.example.password_vault.entity.AppUser;
 import com.example.password_vault.entity.Credential;
+import com.example.password_vault.repo.AppUserRepo;
 import com.example.password_vault.repo.CredRepo;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,19 +17,19 @@ import java.util.Optional;
 public class MyUserDetailService implements UserDetailsService
 {
 
-    final private CredRepo credRepo;
+    final private AppUserRepo appUserRepo;
 
 
-    public MyUserDetailService(CredRepo credRepo)
+    public MyUserDetailService(AppUserRepo appUserRepo)
     {
-        this.credRepo=credRepo;
+        this.appUserRepo=appUserRepo;
     }
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
-        Optional <Credential> credential = credRepo.findByUsername(username);
+        Optional<AppUser> appUser = appUserRepo.findByUsername(username);
 
      if(credential.isEmpty())
      {
@@ -39,4 +40,3 @@ public class MyUserDetailService implements UserDetailsService
                 .password()
     }
 }
-*/

@@ -1,4 +1,6 @@
 com\example\password_vault\service\CredService.class
+com\example\password_vault\config\MySecurityConfig.class
+com\example\password_vault\entity\AppUser.class
 com\example\password_vault\controller\CredController.class
 com\example\password_vault\PasswordVaultApplication.class
 com\example\password_vault\service\CredServiceImpl.class
