@@ -30,7 +30,7 @@ public class MyUserDetailService implements UserDetailsService {
 
         return User.withUsername(appUser.get().getUsername())
                 .password(appUser.get().getPassword())
-                .roles(appUser.get().getPassword())
+                .roles(appUser.get().getRole())
                 .build();
 
     }
