@@ -39,7 +39,18 @@ public class CredServiceImpl implements CredService
     @Override
     public void deleteCredential(Long id)
     {
-        credRepo.deleteById(id);
+        Optional<Credential> credential = credRepo.findById(id);
+
+        if(credential.isPresent())
+        {
+            credRepo.deleteById(id);
+        }
+        else
+        {
+            throw new NoSuchElementException("No Credential Exists");
+        }
+
+
     }
 
     @Override

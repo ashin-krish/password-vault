@@ -82,9 +82,11 @@ public class CredController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteCred(@PathVariable long id) {
+    public ResponseEntity<Void> deleteCred(@PathVariable long id) {
 
         credService.deleteCredential(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/update/{id}")
