@@ -1,11 +1,15 @@
 D:\Password-Vault\src\main\java\com\example\password_vault\config\MySecurityConfig.java
+D:\Password-Vault\src\main\java\com\example\password_vault\controller\AuthController.java
 D:\Password-Vault\src\main\java\com\example\password_vault\controller\CredController.java
 D:\Password-Vault\src\main\java\com\example\password_vault\dto\CredRequest.java
 D:\Password-Vault\src\main\java\com\example\password_vault\dto\CredResponse.java
+D:\Password-Vault\src\main\java\com\example\password_vault\dto\LoginRequest.java
 D:\Password-Vault\src\main\java\com\example\password_vault\entity\AppUser.java
 D:\Password-Vault\src\main\java\com\example\password_vault\entity\Credential.java
 D:\Password-Vault\src\main\java\com\example\password_vault\PasswordVaultApplication.java
+D:\Password-Vault\src\main\java\com\example\password_vault\repo\AppUserRepo.java
 D:\Password-Vault\src\main\java\com\example\password_vault\repo\CredRepo.java
+D:\Password-Vault\src\main\java\com\example\password_vault\service\AppUserService.java
 D:\Password-Vault\src\main\java\com\example\password_vault\service\CredService.java
 D:\Password-Vault\src\main\java\com\example\password_vault\service\CredServiceImpl.java
 D:\Password-Vault\src\main\java\com\example\password_vault\service\MyUserDetailService.java

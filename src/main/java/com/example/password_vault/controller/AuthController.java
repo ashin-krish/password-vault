@@ -1,6 +1,9 @@
 package com.example.password_vault.controller;
 
 import com.example.password_vault.dto.LoginRequest;
+import com.example.password_vault.entity.AppUser;
+import com.example.password_vault.repo.AppUserRepo;
+import com.example.password_vault.service.AppUserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController
 {
      final private AuthenticationManager authenticationManager;
+     final private AppUserService appUserService;
 
      SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
 
-     AuthController(AuthenticationManager authenticationManager)
+     AuthController(AuthenticationManager authenticationManager,AppUserService appUserService)
      {
          this.authenticationManager=authenticationManager;
+         this.appUserService=appUserService;
      }
 
      @PostMapping("/login")
@@ -41,6 +46,14 @@ public class AuthController
          securityContextRepository.saveContext(context,request,response);
 
          return ResponseEntity.ok(" Login Successfull ");
+     }
+
+     @PostMapping("/addUser")
+    public ResponseEntity<String> addUser(@RequestBody AppUser appUser)
+     {
+         appUserService.saveUser(appUser);
+
+        return ResponseEntity.ok(" User Created ");
      }
 
 

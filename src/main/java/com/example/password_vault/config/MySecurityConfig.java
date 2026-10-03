@@ -29,6 +29,7 @@ public class MySecurityConfig
        return httpSecurity.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers("/login").permitAll()
+                                .requestMatchers("/addUser").permitAll()
                                 .requestMatchers("/api/cred/**").authenticated()
                                 .anyRequest().permitAll()
 
@@ -39,6 +40,7 @@ public class MySecurityConfig
     @Bean
     public PasswordEncoder passwordEncoder()
     {
+
         return new BCryptPasswordEncoder();
     }
 
