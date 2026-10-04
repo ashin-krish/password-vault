@@ -1,9 +1,12 @@
 package com.example.password_vault.service;
 
 import com.example.password_vault.entity.Credential;
+import com.example.password_vault.exception.CredentialDoesNotFoundException;
 import com.example.password_vault.repo.CredRepo;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.login.CredentialNotFoundException;
+import java.security.cert.CertificateRevokedException;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -33,7 +36,14 @@ public class CredServiceImpl implements CredService
     @Override
     public Optional<Credential> getCredentialById(Long id) {
 
-        return credRepo.findById(id);
+        Optional<Credential> credential = credRepo.findById(id);
+
+        if(credential.isEmpty())
+        {
+            throw new CredentialDoesNotFoundException(" Credential Does Not Exist ");
+        }
+
+        return credential;
     }
 
     @Override
@@ -47,7 +57,7 @@ public class CredServiceImpl implements CredService
         }
         else
         {
-            throw new NoSuchElementException("No Credential Exists");
+            throw new CredentialDoesNotFoundException("No Credential Found");
         }
 
 
@@ -65,6 +75,6 @@ public class CredServiceImpl implements CredService
 
          return credRepo.save(existingCred.get());
      }
-     throw new NoSuchElementException("No User Exist");
+     throw new CredentialDoesNotFoundException("No Credential Exist");
     }
 }
